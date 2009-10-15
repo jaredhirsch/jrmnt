@@ -2,7 +2,7 @@
 
 // this is the old AsciiFailureReporter. It's actually
 // really verbose by unix standards ('be silent unless you fail').
-class VerboseAsciiFailureReporter implements ReporterInterface
+class VerboseAsciiFailureReporter implements Reporter
 {
 
     public function printHeader()
