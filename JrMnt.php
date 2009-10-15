@@ -252,7 +252,7 @@ class JrMnt
         $reporter->printHeader();
 
         if ($output->hasFailingTests()) {
-            $reporter->printClassInfo($output['metadata']['class']);
+            $reporter->printClassInfo($output->getClass());
             
             $failedTests = 0;
             foreach ($output['tests'] as $test) {

@@ -7,6 +7,10 @@ class TestClassResult implements IteratorAggregate
     {
         $this->testClass = $className;
     }
+    public function getClass()
+    {
+        return $this->testClass;
+    }
 
     protected $results;
 
