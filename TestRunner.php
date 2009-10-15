@@ -42,13 +42,13 @@ class TestRunner
         return $result;
     }
 
-    public function runAllTests(TestClassResult $allResults = null,
-                                UnitTest $testClass)
+    public function runAllTests(UnitTest $testClass,
+                                TestClassResult $allResults = null)
     {
         if ($allResults === null) {
             $allResults = new TestClassResult;
         }
-        $tests = $testClass->findTests();
+        $tests = $testClass->findTests($testClass);
         $allResults->setClass(get_class($testClass));
         foreach ($tests as $test) {
             $result = $this->runTest($test); 

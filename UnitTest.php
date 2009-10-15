@@ -71,7 +71,7 @@ class UnitTest extends TestRunner
 
     public function runAllTests(TestClassResult $allResults = null)
     {
-        return parent::runAllTests($allResults, $this);
+        return parent::runAllTests($this, $allResults);
         /*
         if ($allResults === null) {
             $allResults = new TestClassResult;
