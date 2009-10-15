@@ -59,7 +59,7 @@ class UnitTest extends TestRunner
 
     public function findTests()
     {
-        return parent::findTests();
+        return parent::findTests($this);
     }
 
     protected $allResults;
