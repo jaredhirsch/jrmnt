@@ -197,7 +197,6 @@ class JrMnt
         $tests = $this->findTests();
 
         $allResults = new TestClassResult;
-        // $this->allResults['metadata']['class'] = get_class($this);
         $allResults->setClass(get_class($this));
 
         foreach ($tests as $test) {
@@ -215,10 +214,8 @@ class JrMnt
             }
             $this->tearDown();
 
-           // $this->allResults['tests'][] = $r;
            $allResults->addResult($r);
         }
-        //return $this->allResults;
         return $allResults;
     }
 
