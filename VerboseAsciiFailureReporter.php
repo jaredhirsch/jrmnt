@@ -18,21 +18,6 @@ class VerboseAsciiFailureReporter extends AsciiFailureReporter
         $this->printFooter();
     }
 
-    protected function printFailures(TestClassResult $results)
-    {
-        $failedTests = 0;
-        foreach($results as $test) {
-            if ($test->isFailure()) {
-                $this->printFailedTestInfo($test->getTestName(),
-                                                $test->getTestMessage());
-                $failedTests++;
-            }
-        }
-        $this->printFailureSummary($failedCount = $failedTests, 
-                                $totalTestCount = count($results->getIterator()));
-        
-    }
-
 
     public function printHeader()
     {
