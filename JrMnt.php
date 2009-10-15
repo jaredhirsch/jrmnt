@@ -255,16 +255,17 @@ class JrMnt
             $reporter->printClassInfo($output->getClass());
             
             $failedTests = 0;
-            foreach ($output['tests'] as $test) {
-                if ($test['status'] == 'failed') {
-                    $reporter->printFailedTestInfo($test['name'],
-                                                    $test['message']);
+            $testResults = $output->getIterator();
+            foreach ($testResults as $test) {
+                if ($test->isFailure()) {
+                    $reporter->printFailedTestInfo($test->getTestName(),
+                                                    $test->getTestMessage);
                     $failedTests++;
                 }
             }
         
             $reporter->printFailureSummary($failedCount = $failedTests, 
-                                    $totalTestCount = count($output['tests']));
+                                    $totalTestCount = count($testResults));
         } else {
             $reporter->printSuccessSummary();
         }

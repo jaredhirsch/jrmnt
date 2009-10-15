@@ -7,6 +7,10 @@ class TestResult
     {
         $this->testName = $testName;
     }
+    public function getTestName()
+    {
+        return $this->testName;
+    }
 
     protected $testStatus;
     public function setTestStatus($status)
@@ -27,5 +31,9 @@ class TestResult
     public function setTestMessage($message)
     {
         $this->testMessage = $message;
+    }
+    public function getTestMessage()
+    {
+        return $this->testMessage;
     }
 }
