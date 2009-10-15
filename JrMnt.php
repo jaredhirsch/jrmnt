@@ -234,16 +234,6 @@ class JrMnt
         return $allResults;
     }
 
-    private function hasFailingTests($output)
-    {
-        foreach ($output['tests'] as $test) {
-            if ($test['status'] === 'failed') {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * runAndReport - run()s all the tests and also displays the
      *                results. Default Reporter just sends the
@@ -256,11 +246,9 @@ class JrMnt
     public function runAndReport(Reporter $reporter = null)
     {
         $output = $this->runAllTests();
-
         if ($reporter == null) {
             $reporter = new AsciiFailureReporter;
         }
-
         $reporter->report($output);
     }
 
