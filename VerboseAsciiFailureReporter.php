@@ -2,7 +2,10 @@
 
 // this is the old AsciiFailureReporter. It's actually
 // really verbose by unix standards ('be silent unless you fail').
-class VerboseAsciiFailureReporter implements Reporter
+
+// I know we have potential for an abstract parent here,
+// but just inheriting directly for now.
+class VerboseAsciiFailureReporter extends AsciiFailureReporter
 {
 
     public function report(TestClassResult $results)
@@ -14,6 +17,22 @@ class VerboseAsciiFailureReporter implements Reporter
         }
         $this->printFooter();
     }
+
+    protected function printFailures(TestClassResult $results)
+    {
+        $failedTests = 0;
+        foreach($results as $test) {
+            if ($test->isFailure()) {
+                $this->printFailedTestInfo($test->getTestName(),
+                                                $test->getTestMessage());
+                $failedTests++;
+            }
+        }
+        $this->printFailureSummary($failedCount = $failedTests, 
+                                $totalTestCount = count($results->getIterator()));
+        
+    }
+
 
     public function printHeader()
     {
