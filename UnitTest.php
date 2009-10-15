@@ -71,6 +71,8 @@ class UnitTest extends TestRunner
 
     public function runAllTests(TestClassResult $allResults = null)
     {
+        return parent::runAllTests($allResults, $this);
+        /*
         if ($allResults === null) {
             $allResults = new TestClassResult;
         }
@@ -81,6 +83,7 @@ class UnitTest extends TestRunner
             $allResults->addResult($result);
         }
         return $allResults;
+        */
     }
 
     public function runAndReport(Reporter $reporter = null)

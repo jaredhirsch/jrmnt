@@ -2,12 +2,10 @@
 
 class TestRunner
 {
-    public function findTests()
+    public function findTests(UnitTest $testClass)
     {
         $tests = array();
-        // have to change this for move to parent
-        // $className = get_class($this);
-        $className = get_called_class();
+        $className = get_class($testClass);
         $metaClass = new ReflectionClass($className);
 
         foreach ($metaClass->getMethods() as $metaMethod) {
@@ -44,5 +42,19 @@ class TestRunner
         return $result;
     }
 
+    public function runAllTests(TestClassResult $allResults = null,
+                                UnitTest $testClass)
+    {
+        if ($allResults === null) {
+            $allResults = new TestClassResult;
+        }
+        $tests = $testClass->findTests();
+        $allResults->setClass(get_class($testClass));
+        foreach ($tests as $test) {
+            $result = $this->runTest($test); 
+            $allResults->addResult($result);
+        }
+        return $allResults;
+    }
     
 }
