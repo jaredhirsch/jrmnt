@@ -312,6 +312,21 @@ class JrMnt
         $reporter->printFooter();
     }
 
+    /**
+     * runrun - Just a static convenience method to allow
+     *          runAndReport to be called without instantiating
+     *          the class first.
+     *
+     * @access public
+     * @return void
+     */
+    public static function runrun()
+    {
+        $testClassName = get_called_class();
+        $testClass = new $testClassName;
+        $testClass->runAndReport();
+    }
+
 }
 
 interface ReporterInterface
@@ -337,6 +352,33 @@ interface ReporterInterface
 // in detail. and reports ascii designed for
 // the command line. So here's an expressive name:
 class AsciiFailureReporter implements ReporterInterface
+{
+    public function printHeader() {}
+    public function printFooter() {}
+    public function printClassInfo($className)
+    {
+        echo "\n$className failed tests:\n";
+    }
+    public function printFailedTestInfo($testName, $message = null)
+    {
+        echo "$testName";
+        if ($message) {
+            echo " (message: $message)";
+        }
+        echo ". ";
+    }
+    public function printSuccessSummary()
+    {
+    }
+    public function printFailureSummary($failedTestCount, $totalTestCount)
+    {
+        echo "\n$failedTestCount failed out of $totalTestCount.\n";
+    }
+}
+
+// this is the old AsciiFailureReporter. It's actually
+// really verbose by unix standards ('be silent unless you fail').
+class VerboseAsciiFailureReporter implements ReporterInterface
 {
 
     public function printHeader()
