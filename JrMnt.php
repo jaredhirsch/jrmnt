@@ -261,7 +261,8 @@ class JrMnt
             $reporter = new AsciiFailureReporter;
         }
 
-        $reporter->printHeader();
+        $reporter->report($output);
+      /*  $reporter->printHeader();
 
         if ($output->hasFailingTests()) {
             $reporter->printClassInfo($output->getClass());
@@ -282,6 +283,7 @@ class JrMnt
         }
         
         $reporter->printFooter();
+    */
     }
 
     /**

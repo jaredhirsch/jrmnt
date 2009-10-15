@@ -12,6 +12,27 @@
 // the command line. So here's an expressive name:
 class AsciiFailureReporter implements Reporter
 {
+    public function report(TestClassResult $results)
+    {
+        $this->printHeader();
+        if ($results->hasFailingTests()) {
+            $this->printClassInfo($results->getClass());
+            $failedTests = 0;
+            foreach($results as $test) {
+                if ($test->isFailure()) {
+                    $this->printFailedTestInfo($test->getTestName(),
+                                                    $test->getTestMessage());
+                    $failedTests++;
+                }
+            }
+            $this->printFailureSummary($failedCount = $failedTests, 
+                                    $totalTestCount = count($results->getIterator()));
+        } else {
+            $this->printSuccessSummary();
+        }
+        $this->printFooter();    
+    }
+
     public function printHeader() {}
     public function printFooter() {}
     public function printClassInfo($className)
