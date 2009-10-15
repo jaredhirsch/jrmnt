@@ -68,11 +68,10 @@ class TestRunner
         $reporter->report($output);
     }
     
-    public static function runStatic()
+    public static function runStatic(UnitTest $testClass,
+                                     Reporter $reporter = null)
     {
-        $testClassName = get_called_class();
-        $testClass = new $testClassName;
-        $testClass->runAndReport($testClass);
+        $testClass->runAndReport($testClass, $reporter);
     }
     
 }

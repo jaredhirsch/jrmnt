@@ -57,4 +57,4 @@ class BasicTestBehaviorCheck extends UnitTest
 
 //$r = new BasicTestBehaviorCheck;
 //$r->runAndReport();
-BasicTestBehaviorCheck::runStatic();
+TestRunner::runStatic(new BasicTestBehaviorCheck, new VerboseAsciiFailureReporter);
