@@ -210,8 +210,8 @@ class JrMnt
                 $this->$test();
                 $r->setTestStatus = 'passed';
             } catch (TestException $e) {
-                $r->setTestStatus = $e->getStatus();
-                $r->setTestMessage = $e->getMessage();
+                $r->setTestStatus($e->getStatus());
+                $r->setTestMessage($e->getMessage());
             }
             $this->tearDown();
 
@@ -258,7 +258,7 @@ class JrMnt
             foreach($output as $test) {
                 if ($test->isFailure()) {
                     $reporter->printFailedTestInfo($test->getTestName(),
-                                                    $test->getTestMessage);
+                                                    $test->getTestMessage());
                     $failedTests++;
                 }
             }

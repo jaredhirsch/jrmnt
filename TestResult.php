@@ -15,8 +15,13 @@ class TestResult
     protected $testStatus;
     public function setTestStatus($status)
     {
-        if ($status !== ('passed' || 'failed' || 'skipped')) {
-            throw new BadInputException('test status must be passed, failed, or skipped');
+        // I wanted to say: if a is not b, c, or d.
+        // but having a little trouble with bitwise 
+        // operators, so using the contrapositive.
+        if (($status !== 'passed') &&
+            ($status !== 'failed') && 
+            ($status !== 'skipped')) {
+            throw new DomainException('test status must be passed, failed, or skipped. You said ' . $status);
         }
         $this->testStatus = $status;
     }
