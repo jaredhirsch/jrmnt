@@ -251,7 +251,7 @@ class JrMnt
 
         $reporter->printHeader();
 
-        if ($this->hasFailingTests($output)) {
+        if ($output->hasFailingTests()) {
             $reporter->printClassInfo($output['metadata']['class']);
             
             $failedTests = 0;

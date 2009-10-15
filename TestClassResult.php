@@ -24,4 +24,14 @@ class TestClassResult implements IteratorAggregate
     {
         return new ArrayIterator($this->results);
     }
+
+    public function hasFailingTests()
+    {
+        foreach ($this->results as $result) {
+            if ($result->isFailure()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
