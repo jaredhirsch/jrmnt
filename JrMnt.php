@@ -262,28 +262,6 @@ class JrMnt
         }
 
         $reporter->report($output);
-      /*  $reporter->printHeader();
-
-        if ($output->hasFailingTests()) {
-            $reporter->printClassInfo($output->getClass());
-            
-            $failedTests = 0;
-            foreach($output as $test) {
-                if ($test->isFailure()) {
-                    $reporter->printFailedTestInfo($test->getTestName(),
-                                                    $test->getTestMessage());
-                    $failedTests++;
-                }
-            }
-        
-            $reporter->printFailureSummary($failedCount = $failedTests, 
-                                    $totalTestCount = count($output->getIterator()));
-        } else {
-            $reporter->printSuccessSummary();
-        }
-        
-        $reporter->printFooter();
-    */
     }
 
     /**
