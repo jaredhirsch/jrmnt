@@ -185,6 +185,32 @@ class JrMnt
     protected $allResults;
 
     /**
+     * runTest - run just one test in a test class.
+     *           Return results as a TestResult, or
+     *           pass in a subclass if you like.
+     *
+     * @access public
+     * @return TestResult
+     */
+    public function runTest($test, TestResult $result = null)
+    {
+        if ($result === null) {
+            $result = new TestResult;
+        }
+        $result->setTestName($test);
+        $this->setUp();
+        try {
+            $this->$test();
+            $result->setTestStatus = 'passed';
+        } catch (TestException $e) {
+            $result->setTestStatus($e->getStatus());
+            $result->setTestMessage($e->getMessage());
+        }
+        $this->tearDown();
+        return $result;
+    }
+
+    /**
      * run - runs all tests, returning array with all the
      *       results. Really want to move towards a result
      *       object, but one step at a time.
@@ -192,18 +218,15 @@ class JrMnt
      * @access public
      * @return object allResults
      */
-    public function run()
+    public function runAllTests()
     {
         $tests = $this->findTests();
-
         $allResults = new TestClassResult;
         $allResults->setClass(get_class($this));
-
         foreach ($tests as $test) {
-
-            $r = new TestResult;
+            $result = $this->runTest($test); 
+            /* $r = new TestResult;
             $r->setTestName($test);
-
             $this->setUp();
             try {
                 $this->$test();
@@ -213,8 +236,8 @@ class JrMnt
                 $r->setTestMessage($e->getMessage());
             }
             $this->tearDown();
-
-           $allResults->addResult($r);
+            */
+           $allResults->addResult($result);
         }
         return $allResults;
     }
@@ -240,7 +263,7 @@ class JrMnt
      */
     public function runAndReport(Reporter $reporter = null)
     {
-        $output = $this->run();
+        $output = $this->runAllTests();
 
         if ($reporter == null) {
             $reporter = new AsciiFailureReporter;
