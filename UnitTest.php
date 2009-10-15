@@ -4,7 +4,7 @@ require_once 'Autoload.php';
 
 // same thing as JrMnt, but no comments.
 // I kind of find them really distracting.
-class UnitTest extends TestRunner
+class UnitTest //extends TestRunner
 {
     public function setUp() 
     {
