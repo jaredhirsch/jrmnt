@@ -5,6 +5,14 @@
 class VerboseAsciiFailureReporter implements Reporter
 {
 
+    public function report(TestClassResult $results)
+    {
+        if ($results->hasFailingTests()) {
+            $this->printClassInfo($results->getClass());
+            $this->printFailures($results);
+        }
+    }
+
     public function printHeader()
     {
         echo <<<EOT

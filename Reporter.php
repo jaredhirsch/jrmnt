@@ -10,4 +10,6 @@ interface Reporter
 
     public function printSuccessSummary();
     public function printFailureSummary($failedTestCount, $totalTestCount);
+
+    public function report(TestClassResult $results);
 }
