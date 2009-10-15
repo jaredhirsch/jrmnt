@@ -67,6 +67,12 @@ class TestRunner
         }
         $reporter->report($output);
     }
-
+    
+    public static function runrun()
+    {
+        $testClassName = get_called_class();
+        $testClass = new $testClassName;
+        $testClass->runAndReport($testClass);
+    }
     
 }

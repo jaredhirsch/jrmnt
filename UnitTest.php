@@ -62,10 +62,4 @@ class UnitTest extends TestRunner
         return parent::findTests($this);
     }
 
-    public static function runrun()
-    {
-        $testClassName = get_called_class();
-        $testClass = new $testClassName;
-        $testClass->runAndReport($testClass);
-    }
 }
