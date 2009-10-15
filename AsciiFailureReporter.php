@@ -10,7 +10,7 @@
 // this reporter only tells us about failures
 // in detail. and reports ascii designed for
 // the command line. So here's an expressive name:
-class AsciiFailureReporter implements ReporterInterface
+class AsciiFailureReporter implements Reporter
 {
     public function printHeader() {}
     public function printFooter() {}
