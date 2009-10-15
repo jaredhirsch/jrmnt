@@ -26,6 +26,23 @@ class TestRunner
                 (strpos($comment, '@Test') !== false));
     }
 
+    public function runTest($test, UnitTest $testClass, TestResult $result = null)
+    {
+        if ($result === null) {
+            $result = new TestResult;
+        }
+        $result->setTestName($test);
+        $testClass->setUp();
+        try {
+            $testClass->$test();
+            $result->setTestStatus('passed');
+        } catch (TestException $e) {
+            $result->setTestStatus($e->getStatus());
+            $result->setTestMessage($e->getMessage());
+        }
+        $testClass->tearDown();
+        return $result;
+    }
 
     
 }

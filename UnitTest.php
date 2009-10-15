@@ -66,20 +66,7 @@ class UnitTest extends TestRunner
 
     public function runTest($test, TestResult $result = null)
     {
-        if ($result === null) {
-            $result = new TestResult;
-        }
-        $result->setTestName($test);
-        $this->setUp();
-        try {
-            $this->$test();
-            $result->setTestStatus('passed');
-        } catch (TestException $e) {
-            $result->setTestStatus($e->getStatus());
-            $result->setTestMessage($e->getMessage());
-        }
-        $this->tearDown();
-        return $result;
+        return parent::runTest($test, $this, $result);
     }
 
     public function runAllTests(TestClassResult $allResults = null)
