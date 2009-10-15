@@ -49,7 +49,7 @@ class TestRunner
         if ($testResults === null) {
             $testResults = new TestClassResult;
         }
-        $tests = $testClass->findTests($testClass);
+        $tests = $this->findTests($testClass);
         $testResults->setClass(get_class($testClass));
         foreach ($tests as $test) {
             $result = $this->runTest($test, $testClass); 
