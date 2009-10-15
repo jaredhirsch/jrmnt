@@ -4,7 +4,7 @@ require_once 'Autoload.php';
 
 // same thing as JrMnt, but no comments.
 // I kind of find them really distracting.
-class UnitTest
+class UnitTest extends TestRunner
 {
     public function setUp() 
     {
@@ -59,24 +59,7 @@ class UnitTest
 
     public function findTests()
     {
-        $tests = array();
-        $className = get_class($this);
-        $metaClass = new ReflectionClass($className);
-
-        foreach ($metaClass->getMethods() as $metaMethod) {
-            $comment = $metaMethod->getDocComment();
-            if ($this->commentContainsTestFlag($comment)) {
-                $tests[] = $metaMethod->getName();
-            }
-        }
-    
-        return $tests;
-    }
-
-    private function commentContainsTestFlag($comment)
-    {
-        return (($comment != false) && 
-                (strpos($comment, '@Test') !== false));
+        return parent::findTests();
     }
 
     protected $allResults;
