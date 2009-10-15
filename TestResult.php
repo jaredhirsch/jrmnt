@@ -16,6 +16,12 @@ class TestResult
         }
         $this->testStatus = $status;
     }
+    // used by TestClassResult to determine
+    // if the test was a failure or not.
+    public function isFailure()
+    {
+        return ($this->testStatus === 'failed');
+    }
 
     protected $testMessage;
     public function setTestMessage($message)
