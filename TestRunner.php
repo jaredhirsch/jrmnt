@@ -71,7 +71,8 @@ class TestRunner
     public static function runStatic(UnitTest $testClass,
                                      Reporter $reporter = null)
     {
-        $testClass->runAndReport($testClass, $reporter);
+        $tr = new TestRunner;
+        $tr->runAndReport($testClass, $reporter);
     }
     
 }
