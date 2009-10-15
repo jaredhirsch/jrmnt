@@ -211,33 +211,25 @@ class JrMnt
     }
 
     /**
-     * run - runs all tests, returning array with all the
-     *       results. Really want to move towards a result
-     *       object, but one step at a time.
+     * runAllTests - discover tests in self, run
+     *               each, and capture the TestResult
+     *               from each run into a TestClassResult.
+     *               Optionally, pass in your own object
+     *               to capture results into.
      * 
      * @access public
      * @return object allResults
      */
-    public function runAllTests()
+    public function runAllTests(TestClassResult $allResults = null)
     {
+        if ($allResults === null) {
+            $allResults = new TestClassResult;
+        }
         $tests = $this->findTests();
-        $allResults = new TestClassResult;
         $allResults->setClass(get_class($this));
         foreach ($tests as $test) {
             $result = $this->runTest($test); 
-            /* $r = new TestResult;
-            $r->setTestName($test);
-            $this->setUp();
-            try {
-                $this->$test();
-                $r->setTestStatus = 'passed';
-            } catch (TestException $e) {
-                $r->setTestStatus($e->getStatus());
-                $r->setTestMessage($e->getMessage());
-            }
-            $this->tearDown();
-            */
-           $allResults->addResult($result);
+            $allResults->addResult($result);
         }
         return $allResults;
     }
