@@ -57,5 +57,16 @@ class TestRunner
         }
         return $testResults;
     }
+
+    public function runAndReport(UnitTest $testClass,
+                                 Reporter $reporter = null)
+    {
+        $output = $this->runAllTests($testClass);
+        if ($reporter == null) {
+            $reporter = new AsciiFailureReporter;
+        }
+        $reporter->report($output);
+    }
+
     
 }

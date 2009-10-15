@@ -63,20 +63,10 @@ class UnitTest extends TestRunner
     }
 
     protected $allResults;
-
-    public function runAndReport(Reporter $reporter = null)
-    {
-        $output = $this->runAllTests($this);
-        if ($reporter == null) {
-            $reporter = new AsciiFailureReporter;
-        }
-        $reporter->report($output);
-    }
-
     public static function runrun()
     {
         $testClassName = get_called_class();
         $testClass = new $testClassName;
-        $testClass->runAndReport();
+        $testClass->runAndReport($testClass);
     }
 }
