@@ -1,6 +1,6 @@
 <?php
 
-interface ReporterInterface
+interface Reporter
 {
     public function printHeader();
     public function printFooter();
