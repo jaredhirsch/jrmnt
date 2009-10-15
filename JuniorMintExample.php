@@ -13,6 +13,7 @@ class BasicTestBehaviorCheck extends JrMnt
     }
 
     /**
+     * @Test
      */
     public function badTest()
     {
@@ -28,6 +29,7 @@ class BasicTestBehaviorCheck extends JrMnt
     }
 
     /**
+     * @Test
      */
     public function failTest()
     {
@@ -53,5 +55,6 @@ class BasicTestBehaviorCheck extends JrMnt
     }
 }
 
-$r = new BasicTestBehaviorCheck;
-$r->runAndReport();
+//$r = new BasicTestBehaviorCheck;
+//$r->runAndReport();
+BasicTestBehaviorCheck::runrun();
