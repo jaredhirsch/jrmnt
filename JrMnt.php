@@ -177,7 +177,7 @@ class JrMnt
 
     /**
      * allResults - results of each test run 
-     *              are appended to this array
+     *              are appended to this Iterator
      * 
      * @var mixed
      * @access protected
@@ -190,13 +190,15 @@ class JrMnt
      *       object, but one step at a time.
      * 
      * @access public
-     * @return array allResults
+     * @return object allResults
      */
     public function run()
     {
         $tests = $this->findTests();
 
-        $this->allResults['metadata']['class'] = get_class($this);
+        $allResults = new TestClassResult;
+        // $this->allResults['metadata']['class'] = get_class($this);
+        $allResults->setClass(get_class($this));
 
         foreach ($tests as $test) {
 
@@ -213,9 +215,9 @@ class JrMnt
             }
             $this->tearDown();
 
-            $this->allResults['tests'][] = $r;
+           // $this->allResults['tests'][] = $r;
         }
-        return $this->allResults;
+        //return $this->allResults;
     }
 
     private function hasFailingTests($output)
