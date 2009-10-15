@@ -200,20 +200,20 @@ class JrMnt
 
         foreach ($tests as $test) {
 
-            $this->result = array();
-            $this->result['name'] = $test;
+            $r = new TestResult;
+            $r->setTestName = $test;
 
             $this->setUp();
             try {
                 $this->$test();
-                $this->result['status'] = 'passed';
+                $r->setTestStatus = 'passed';
             } catch (TestException $e) {
-                $this->result['status'] = $e->getStatus();
-                $this->result['message'] = $e->getMessage();
+                $r->setTestStatus = $e->getStatus();
+                $r->setTestMessage = $e->getMessage();
             }
             $this->tearDown();
 
-            $this->allResults['tests'][] = $this->result;
+            $this->allResults['tests'][] = $r;
         }
         return $this->allResults;
     }
