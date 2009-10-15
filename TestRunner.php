@@ -24,7 +24,8 @@ class TestRunner
                 (strpos($comment, '@Test') !== false));
     }
 
-    public function runTest($test, UnitTest $testClass, TestResult $result = null)
+    public function runTest($test, UnitTest $testClass, 
+                            TestResult $result = null)
     {
         if ($result === null) {
             $result = new TestResult;
@@ -43,18 +44,18 @@ class TestRunner
     }
 
     public function runAllTests(UnitTest $testClass,
-                                TestClassResult $allResults = null)
+                                TestClassResult $testResults = null)
     {
-        if ($allResults === null) {
-            $allResults = new TestClassResult;
+        if ($testResults === null) {
+            $testResults = new TestClassResult;
         }
         $tests = $testClass->findTests($testClass);
-        $allResults->setClass(get_class($testClass));
+        $testResults->setClass(get_class($testClass));
         foreach ($tests as $test) {
-            $result = $this->runTest($test); 
-            $allResults->addResult($result);
+            $result = $this->runTest($test, $testClass); 
+            $testResults->addResult($result);
         }
-        return $allResults;
+        return $testResults;
     }
     
 }

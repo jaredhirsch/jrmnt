@@ -64,26 +64,9 @@ class UnitTest extends TestRunner
 
     protected $allResults;
 
-    public function runTest($test, TestResult $result = null)
-    {
-        return parent::runTest($test, $this, $result);
-    }
-
     public function runAllTests(TestClassResult $allResults = null)
     {
         return parent::runAllTests($this, $allResults);
-        /*
-        if ($allResults === null) {
-            $allResults = new TestClassResult;
-        }
-        $tests = $this->findTests();
-        $allResults->setClass(get_class($this));
-        foreach ($tests as $test) {
-            $result = $this->runTest($test); 
-            $allResults->addResult($result);
-        }
-        return $allResults;
-        */
     }
 
     public function runAndReport(Reporter $reporter = null)
