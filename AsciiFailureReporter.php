@@ -1,15 +1,5 @@
 <?php
 
-// right now, reporter is just a template.
-// once we have results in a Result object,
-// might like to move the result-formatting
-// code into this class, then use whatever
-// template. Basically the idea is to refactor
-// towards a ViewHelper + template approach.
-
-// this reporter only tells us about failures
-// in detail. and reports ascii designed for
-// the command line. So here's an expressive name:
 class AsciiFailureReporter implements Reporter
 {
     public function report(TestClassResult $results)
