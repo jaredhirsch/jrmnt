@@ -2,8 +2,6 @@
 
 require_once 'Autoload.php';
 
-// same thing as JrMnt, but no comments.
-// I kind of find them really distracting.
 class UnitTest
 {
     public function setUp() 
