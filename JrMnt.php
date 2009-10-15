@@ -216,8 +216,10 @@ class JrMnt
             $this->tearDown();
 
            // $this->allResults['tests'][] = $r;
+           $allResults->addResult($r);
         }
         //return $this->allResults;
+        return $allResults;
     }
 
     private function hasFailingTests($output)
