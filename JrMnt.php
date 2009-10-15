@@ -201,7 +201,7 @@ class JrMnt
         $this->setUp();
         try {
             $this->$test();
-            $result->setTestStatus = 'passed';
+            $result->setTestStatus('passed');
         } catch (TestException $e) {
             $result->setTestStatus($e->getStatus());
             $result->setTestMessage($e->getMessage());
