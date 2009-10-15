@@ -31,11 +31,13 @@ class TestClassResult implements IteratorAggregate
 
     public function hasFailingTests()
     {
-        foreach ($this->results as $result) {
+        return true;
+      /*  foreach ($this->results as $result) {
             if ($result->isFailure()) {
                 return true;
             }
         }
         return false;
+    */
     }
 }

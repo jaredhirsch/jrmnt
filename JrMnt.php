@@ -203,7 +203,7 @@ class JrMnt
         foreach ($tests as $test) {
 
             $r = new TestResult;
-            $r->setTestName = $test;
+            $r->setTestName($test);
 
             $this->setUp();
             try {
@@ -255,8 +255,7 @@ class JrMnt
             $reporter->printClassInfo($output->getClass());
             
             $failedTests = 0;
-            $testResults = $output->getIterator();
-            foreach ($testResults as $test) {
+            foreach($output as $test) {
                 if ($test->isFailure()) {
                     $reporter->printFailedTestInfo($test->getTestName(),
                                                     $test->getTestMessage);
@@ -265,7 +264,7 @@ class JrMnt
             }
         
             $reporter->printFailureSummary($failedCount = $failedTests, 
-                                    $totalTestCount = count($testResults));
+                                    $totalTestCount = count($output->getIterator()));
         } else {
             $reporter->printSuccessSummary();
         }
