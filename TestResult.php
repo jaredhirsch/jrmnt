@@ -18,6 +18,7 @@ class TestResult
         // I wanted to say: if a is not b, c, or d.
         // but having a little trouble with bitwise 
         // operators, so using the contrapositive.
+        // todo: clean up.
         if (($status !== 'passed') &&
             ($status !== 'failed') && 
             ($status !== 'skipped')) {

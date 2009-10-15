@@ -1,8 +1,8 @@
 <?php
 
-require_once 'JrMnt.php';
+require_once 'Autoload.php';
 
-class BasicTestBehaviorCheck extends JrMnt
+class BasicTestBehaviorCheck extends UnitTest
 {
     /**
      * @Test
