@@ -31,9 +31,7 @@ class JrMnt
     {
     }
 
-
 // some convenience functions to halt execution immediately
-
 
     /**
      * skip - marks test as 'skipped' and halts test execution
@@ -71,11 +69,7 @@ class JrMnt
         throw new FailedTestException($message);
     }
 
-
-
 // some functions which actually test the state of the world
-
-
 
     /**
      * should - Expects argument to evaluate to true. This method
@@ -145,14 +139,14 @@ class JrMnt
         }
     }
 
-
 // core test-related utility functions
-
 
     /**
      * findTests - find tests in file. Currently checks
      *             doccomment for the string '@' . 'Test'.
-     *             left public for ease of testing.
+     *             Left public for ease of testing. I
+     *             happen to think this is a particularly
+     *             beautiful method.
      * 
      * @access public
      * @return void
