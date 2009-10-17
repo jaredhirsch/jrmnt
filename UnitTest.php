@@ -4,13 +4,9 @@ require_once 'Autoload.php';
 
 class UnitTest
 {
-    public function setUp() 
-    {
-    }
+    public function setUp() {}
 
-    public function tearDown() 
-    {
-    }
+    public function tearDown() {}
 
     public function skip($message = null)
     {
@@ -40,19 +36,4 @@ class UnitTest
             throw new FailedTestException();
         }
     }
-
-    public function shouldBeEqual($one, $other)
-    {
-        if ($one != $other) {
-            throw new FailedTestException("$one does not equal $other");
-        }
-    }
-
-    public function shouldBeIdentical($one, $other)
-    {
-        if ($one !== $other) {
-            throw new FailedTestException("$one is not identical to $other");
-        }
-    }
-
 }
