@@ -2,6 +2,38 @@
 
 class TestRunner
 {
+    public static function runStatic(UnitTest $testClass,
+                                     Reporter $reporter = null)
+    {
+        $tr = new TestRunner;
+        $tr->runAndReport($testClass, $reporter);
+    }
+
+    public function runAndReport(UnitTest $testClass,
+                                 Reporter $reporter = null)
+    {
+        $output = $this->runAllTests($testClass);
+        if ($reporter == null) {
+            $reporter = new AsciiFailureReporter;
+        }
+        $reporter->report($output);
+    }
+
+    public function runAllTests(UnitTest $testClass,
+                                TestClassResult $testResults = null)
+    {
+        if ($testResults === null) {
+            $testResults = new TestClassResult;
+        }
+        $tests = $this->findTests($testClass);
+        $testResults->setClass(get_class($testClass));
+        foreach ($tests as $test) {
+            $result = $this->runTest($test, $testClass); 
+            $testResults->addResult($result);
+        }
+        return $testResults;
+    }
+
     public function findTests(UnitTest $testClass)
     {
         $tests = array();
@@ -16,12 +48,6 @@ class TestRunner
         }
     
         return $tests;
-    }
-
-    private function commentContainsTestFlag($comment)
-    {
-        return (($comment != false) && 
-                (strpos($comment, '@Test') !== false));
     }
 
     public function runTest($test, UnitTest $testClass, 
@@ -43,36 +69,10 @@ class TestRunner
         return $result;
     }
 
-    public function runAllTests(UnitTest $testClass,
-                                TestClassResult $testResults = null)
+    private function commentContainsTestFlag($comment)
     {
-        if ($testResults === null) {
-            $testResults = new TestClassResult;
-        }
-        $tests = $this->findTests($testClass);
-        $testResults->setClass(get_class($testClass));
-        foreach ($tests as $test) {
-            $result = $this->runTest($test, $testClass); 
-            $testResults->addResult($result);
-        }
-        return $testResults;
+        return (($comment != false) && 
+                (strpos($comment, '@Test') !== false));
     }
 
-    public function runAndReport(UnitTest $testClass,
-                                 Reporter $reporter = null)
-    {
-        $output = $this->runAllTests($testClass);
-        if ($reporter == null) {
-            $reporter = new AsciiFailureReporter;
-        }
-        $reporter->report($output);
-    }
-    
-    public static function runStatic(UnitTest $testClass,
-                                     Reporter $reporter = null)
-    {
-        $tr = new TestRunner;
-        $tr->runAndReport($testClass, $reporter);
-    }
-    
 }
