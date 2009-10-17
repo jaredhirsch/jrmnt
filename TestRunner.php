@@ -12,19 +12,16 @@ class TestRunner
     public function runAndReport(UnitTest $testClass,
                                  Reporter $reporter = null)
     {
-        $output = $this->runAllTests($testClass);
+        $output = $this->runAllTests($testClass, new TestClassResult);
         if ($reporter == null) {
             $reporter = new AsciiFailureReporter;
         }
         $reporter->report($output);
     }
 
-    public function runAllTests(UnitTest $testClass,
-                                TestClassResult $testResults = null)
+    public function runAllTests(UnitTest $testClass, 
+                                TestClassResult $testResults)
     {
-        if ($testResults === null) {
-            $testResults = new TestClassResult;
-        }
         $tests = $this->findTests($testClass);
         $testResults->setClass(get_class($testClass));
         foreach ($tests as $test) {
