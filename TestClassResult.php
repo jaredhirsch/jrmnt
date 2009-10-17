@@ -2,16 +2,6 @@
 
 class TestClassResult implements IteratorAggregate
 {
-    protected $testClass;
-    public function setClass($className)
-    {
-        $this->testClass = $className;
-    }
-    public function getClass()
-    {
-        return $this->testClass;
-    }
-
     protected $results;
 
     public function __construct()
@@ -39,4 +29,17 @@ class TestClassResult implements IteratorAggregate
         return false;
     
     }
+
+    protected $testClass;
+
+    public function setClass($className)
+    {
+        $this->testClass = $className;
+    }
+
+    public function getClass()
+    {
+        return $this->testClass;
+    }
+
 }
