@@ -23,17 +23,18 @@ class UnitTest
         throw new FailedTestException($message);
     }
 
-    public function should($boolean)
+    public function shouldBeEqual($one, $other)
     {
-        if (!($boolean)) {
-            throw new FailedTestException();
+        if ($one != $other) {
+            throw new FailedTestException("$one does not equal $other");
         }
     }
 
-    public function shouldnt($boolean)
+    public function shouldBeIdentical($one, $other)
     {
-        if ($boolean) {
-            throw new FailedTestException();
+        if ($one !== $other) {
+            throw new FailedTestException("$one is not identical to $other");
         }
     }
+
 }
