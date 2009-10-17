@@ -7,17 +7,41 @@ class BasicTestBehaviorCheck extends UnitTest
     /**
      * @Test
      */
-    public function goodTest()
+    public function equalityTest()
     {
-        $this->should(1 === 1);
+        $this->shouldBeEqual(1, 1);
     }
 
     /**
      * @Test
      */
-    public function badTest()
+    public function equalityFailureTest()
     {
-        $this->shouldnt(true);
+        try {
+            $this->shouldBeEqual(1, 2);
+        } catch (FailedTestException $e) {
+            $this->pass();
+        }
+    }
+
+    /**
+     * @Test
+     */
+    public function identicalityTest()
+    {
+        $this->shouldBeIdentical(1, 1);
+    }
+
+    /**
+     * @Test
+     */
+    public function identicalityFailureTest()
+    {
+        try {
+            $this->shouldBeIdentical(1, '1');
+        } catch (FailedTestException $e) {
+            $this->pass();
+        }
     }
 
     /**
@@ -25,15 +49,8 @@ class BasicTestBehaviorCheck extends UnitTest
      */
     public function passTest()
     {
-        $this->pass('pass because I say so');
-    }
-
-    /**
-     * @Test
-     */
-    public function failTest()
-    {
-        $this->fail('fail because I say so');
+        $this->pass();
+        $this->fail('should immediately halt execution after pass()');
     }
 
     /**
@@ -41,20 +58,47 @@ class BasicTestBehaviorCheck extends UnitTest
      */
     public function skipTest()
     {
-        $this->skip('this skip message should appear');
-        $this->fail('fail message after skip should NEVER appear');
+        $this->skip();
+        $this->fail('should immediately halt execution after skip()');
     }
-    
-    /** @Test */
-    public function ShouldFailEvenIfEarlierShouldsSucceed()
+
+    /**
+     * @Test
+     */
+    public function failTest()
     {
-        $this->should(true);
-        $this->should(true);
-        $this->should(true);
-        $this->should(false);
+        try {
+            $this->fail('expected failure');
+            $this->fail('should never get here');
+        } catch (FailedTestException $e) {
+            if ($e->getMessage() == 'should never get here') {
+                $this->fail();
+            }
+        }
+    }
+
+    /** @Test */
+    public function shouldFailEvenIfEarlierShouldsSucceed()
+    {
+        $this->shouldBeEqual(1,1);
+        try {
+            $this->shouldBeEqual(1,2);
+        } catch (FailedTestException $e) {}
+    }
+
+    /* @Test */
+    public function shouldNotRunTestIfCommentIsBlockInsteadOfDoccomment()
+    {
+        $this->fail();
+    }
+
+    /** @ Test */
+    public function shouldNotRunTestIfCommentContainsASpace()
+    {
+        $this->fail();
     }
 }
 
 //$r = new BasicTestBehaviorCheck;
 //$r->runAndReport();
-TestRunner::runStatic(new BasicTestBehaviorCheck, new VerboseAsciiFailureReporter);
+TestRunner::runStatic(new BasicTestBehaviorCheck, new AsciiFailureReporter);
