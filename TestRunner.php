@@ -28,7 +28,7 @@ class TestRunner
         $tests = $this->findTests($testClass);
         $testResults->setClass(get_class($testClass));
         foreach ($tests as $test) {
-            $result = $this->runTest($test, $testClass); 
+            $result = $this->runTest($test, $testClass, new TestResult); 
             $testResults->addResult($result);
         }
         return $testResults;
@@ -50,12 +50,8 @@ class TestRunner
         return $tests;
     }
 
-    public function runTest($test, UnitTest $testClass, 
-                            TestResult $result = null)
+    public function runTest($test, UnitTest $testClass, TestResult $result)
     {
-        if ($result === null) {
-            $result = new TestResult;
-        }
         $result->setTestName($test);
         $testClass->setUp();
         try {
