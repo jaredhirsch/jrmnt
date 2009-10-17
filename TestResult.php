@@ -15,10 +15,6 @@ class TestResult
     protected $testStatus;
     public function setTestStatus($status)
     {
-        // I wanted to say: if a is not b, c, or d.
-        // but having a little trouble with bitwise 
-        // operators, so using the contrapositive.
-        // todo: clean up.
         if (($status !== 'passed') &&
             ($status !== 'failed') && 
             ($status !== 'skipped')) {
@@ -26,8 +22,7 @@ class TestResult
         }
         $this->testStatus = $status;
     }
-    // used by TestClassResult to determine
-    // if the test was a failure or not.
+
     public function isFailure()
     {
         return ($this->testStatus === 'failed');
